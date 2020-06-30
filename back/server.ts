@@ -3,6 +3,7 @@ const serveIndex = require("serve-index");
 
 const app = express();
 
+// middleware for logging url
 app.use((req, res, next) => {
   console.log("req.url", req.url);
   next();
