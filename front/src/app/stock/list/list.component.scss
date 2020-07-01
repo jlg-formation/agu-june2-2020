@@ -2,6 +2,13 @@ caption {
   display: none;
 }
 
+nav {
+  padding-bottom: 1em;
+  button {
+    margin-right: 0.5em;
+  }
+}
+
 table {
   border: 0.1em solid #bbb;
   border-collapse: collapse;
