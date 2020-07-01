@@ -1,0 +1,23 @@
+caption {
+  display: none;
+}
+
+table {
+  border: 0.1em solid #bbb;
+  border-collapse: collapse;
+  td, th {
+    padding: 0.5em 1em;
+  }
+
+  thead {
+    background: #bbb;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #eee;
+  }
+
+  td.price, td.qty {
+    text-align: right;
+  }
+}
