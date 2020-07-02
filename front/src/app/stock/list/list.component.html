@@ -16,8 +16,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr (click)="toggle(a)" *ngFor="let a of articleService.articles">
-        <td class="name" title="{{ a.name }}">{{ a.name | ellipsis : 15 }}</td>
+      <tr
+        *ngFor="let a of articleService.articles"
+        (click)="toggle(a)"
+        [class.selected]="selectedArticles.includes(a)"
+      >
+        <td class="name" title="{{ a.name }}">{{ a.name | ellipsis: 15 }}</td>
         <td class="price">{{ a.price | currency }}</td>
         <td class="qty">{{ a.qty }}</td>
       </tr>
