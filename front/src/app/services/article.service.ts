@@ -19,6 +19,10 @@ export class ArticleService {
     return JSON.parse(str) as Article[];
   }
 
+  refresh() {
+    this.articles = this.getArticles();
+  }
+
   save() {
     localStorage.setItem('articles', JSON.stringify(this.articles));
   }

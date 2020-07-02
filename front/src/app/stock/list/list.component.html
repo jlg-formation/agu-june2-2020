@@ -1,7 +1,7 @@
 <main>
   <h1>Liste des articles</h1>
   <nav>
-    <button title="Rafraichir"><fa-icon [icon]="faSync"></fa-icon></button>
+    <button (click)="articleService.refresh()" title="Rafraichir"><fa-icon [icon]="faSync"></fa-icon></button>
     <button routerLink="/stock/new"><fa-icon [icon]="faPlus"></fa-icon></button>
     <button *ngIf="selectedArticles.length > 0" (click)="remove()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
   </nav>
