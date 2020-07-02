@@ -1,9 +1,16 @@
+export const fakeLocalStorage = {
+  articles: undefined,
+};
+
 export const windowMock = {
   provide: 'Window',
   useValue: {
     localStorage: {
-      getItem(str) {
-        return undefined;
+      getItem(key: string) {
+        return fakeLocalStorage[key];
+      },
+      setItem(key: string, val: string) {
+        fakeLocalStorage[key] = val;
       },
     },
   },
