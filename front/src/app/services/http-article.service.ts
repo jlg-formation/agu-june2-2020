@@ -15,6 +15,7 @@ export class HttpArticleService extends ArticleService {
   }
 
   refresh() {
+    super.refresh();
     console.log('start refresh');
     this.http.get<Article[]>('http://localhost:3000/ws/articles').subscribe({
       next: (articles) => {
