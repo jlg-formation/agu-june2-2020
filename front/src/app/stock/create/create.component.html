@@ -1,6 +1,6 @@
 <main>
   <h1>Ajout d'un article</h1>
-  <form [formGroup]="f">
+  <form [formGroup]="f" (ngSubmit)="submit()">
     <label>
       <div>Nom</div>
       <input type="text" appAutofocus formControlName="name" />
@@ -16,7 +16,7 @@
       <div>Quantité</div>
       <input type="number" formControlName="qty" step="1" min="0" />
     </label>
-    <button class="primary">Créer</button>
+    <button type="submit" class="primary">Créer</button>
   </form>
 </main>
 <!-- {{ f.value | json }} -->
