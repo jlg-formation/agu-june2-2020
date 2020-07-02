@@ -2,7 +2,7 @@ import express from "express";
 import serveIndex from "serve-index";
 import cors from "cors";
 
-const articles = [
+let articles = [
   { id: 'a1', name: "Tournevis", price: 2.34, qty: 123 },
   { id: 'a2', name: "Tournevis Cruciforme", price: 2.34, qty: 1000 },
   { id: 'a3', name: "Pince", price: 12.34, qty: 45 },
@@ -34,6 +34,12 @@ app.post("/ws/articles", (req, res) => {
   article.id = 'a' + lastId;
   articles.push(article);
   res.status(201).json(article);
+});
+
+app.delete("/ws/articles", (req, res) => {
+  const ids = req.body;
+  articles = articles.filter(a => !ids.includes(a.id));
+  res.status(204).end();
 });
 
 app.use(express.static("www"));
