@@ -25,4 +25,10 @@ export class ListComponent implements OnInit {
     // add
     this.selectedArticles.push(article);
   }
+
+  remove() {
+    console.log('remove');
+    this.articleService.remove(this.selectedArticles);
+    this.selectedArticles.length = 0;
+  }
 }

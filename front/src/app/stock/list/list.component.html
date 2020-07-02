@@ -3,7 +3,7 @@
   <nav>
     <button>Rafraichir</button>
     <button routerLink="/stock/new">Ajouter</button>
-    <button *ngIf="selectedArticles.length > 0">Supprimer</button>
+    <button *ngIf="selectedArticles.length > 0" (click)="remove()">Supprimer</button>
   </nav>
   <table>
     <caption>
