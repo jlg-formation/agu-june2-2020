@@ -16,4 +16,8 @@ export class ArticleService {
   constructor() {
     console.log('service instantiated');
   }
+
+  add(article: Article) {
+    this.articles.push(article);
+  }
 }
