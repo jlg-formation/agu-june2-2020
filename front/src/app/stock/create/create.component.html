@@ -4,6 +4,9 @@
     <label>
       <div>Nom</div>
       <input type="text" appAutofocus formControlName="name" />
+      <div class="error" >
+        <span *ngIf="f.controls.name.invalid && f.controls.name.touched">Oups... ce champ est requis.</span>
+      </div>
     </label>
     <label>
       <div>Prix</div>
