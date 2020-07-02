@@ -1,7 +1,10 @@
 import express from "express";
 import serveIndex from "serve-index";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
 
 // middleware for logging url
 app.use((req, res, next) => {
