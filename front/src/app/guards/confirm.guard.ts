@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -11,6 +11,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ConfirmGuard implements CanActivate {
+
+  constructor(@Inject('Window') private window: Window) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -19,7 +22,7 @@ export class ConfirmGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const answer = window.confirm('Are you sure ?');
+    const answer = this.window.confirm('Are you sure ?');
     return answer;
   }
 }
