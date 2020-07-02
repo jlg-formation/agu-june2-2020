@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListComponent } from './list.component';
 import { WidgetModule } from 'src/app/widget/widget.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { windowMock } from 'src/mock/Window';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -11,9 +12,9 @@ describe('ListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [WidgetModule, FontAwesomeModule],
-      declarations: [ ListComponent ]
-    })
-    .compileComponents();
+      declarations: [ListComponent],
+      providers: [windowMock],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

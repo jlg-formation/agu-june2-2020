@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ArticleService } from './article.service';
@@ -8,8 +8,11 @@ import { Article } from '../interfaces/article';
   providedIn: 'root',
 })
 export class HttpArticleService extends ArticleService {
-  constructor(private http: HttpClient) {
-    super();
+  constructor(
+    @Inject('Window') protected window: Window,
+    private http: HttpClient
+  ) {
+    super(window);
     console.log('instantiated http article service');
     this.refresh();
   }
@@ -58,16 +61,18 @@ export class HttpArticleService extends ArticleService {
       }),
       body: ids,
     };
-    this.http.delete<void>('http://localhost:3000/ws/articles', options).subscribe({
-      next: () => {
-        this.refresh();
-      },
-      error: (err) => {
-        console.error('err: ', err);
-      },
-      complete: () => {
-        console.log('complete');
-      },
-    });
+    this.http
+      .delete<void>('http://localhost:3000/ws/articles', options)
+      .subscribe({
+        next: () => {
+          this.refresh();
+        },
+        error: (err) => {
+          console.error('err: ', err);
+        },
+        complete: () => {
+          console.log('complete');
+        },
+      });
   }
 }

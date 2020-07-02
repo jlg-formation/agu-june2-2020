@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Article } from '../interfaces/article';
 
 @Injectable({
@@ -7,12 +7,12 @@ import { Article } from '../interfaces/article';
 export class ArticleService {
   articles: Article[] = this.getArticles();
 
-  constructor() {
+  constructor(@Inject('Window') protected window: Window) {
     console.log('service instantiated');
   }
 
   getArticles(): Article[] {
-    const str = localStorage.getItem('articles');
+    const str = this.window.localStorage.getItem('articles');
     if (!str) {
       return [];
     }
@@ -24,7 +24,7 @@ export class ArticleService {
   }
 
   save() {
-    localStorage.setItem('articles', JSON.stringify(this.articles));
+    this.window.localStorage.setItem('articles', JSON.stringify(this.articles));
   }
 
   add(article: Article) {
