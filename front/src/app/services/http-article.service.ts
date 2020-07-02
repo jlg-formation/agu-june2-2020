@@ -27,7 +27,22 @@ export class HttpArticleService extends ArticleService {
       },
       complete: () => {
         console.log('complete');
-      }
+      },
+    });
+  }
+
+  add(article: Article) {
+    super.add(article);
+    this.http.post<void>('http://localhost:3000/ws/articles', article).subscribe({
+      next: () => {
+        this.refresh();
+      },
+      error: (err) => {
+        console.error('err: ', err);
+      },
+      complete: () => {
+        console.log('complete');
+      },
     });
   }
 }
