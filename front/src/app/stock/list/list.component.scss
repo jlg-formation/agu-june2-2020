@@ -12,7 +12,8 @@ nav {
 table {
   border: 0.1em solid #bbb;
   border-collapse: collapse;
-  td, th {
+  td,
+  th {
     padding: 0.5em 1em;
   }
 
@@ -24,7 +25,18 @@ table {
     background: #eee;
   }
 
-  td.price, td.qty {
+  td.price,
+  td.qty {
     text-align: right;
+  }
+
+  tbody tr {
+    cursor: pointer;
+    &:hover {
+      background: #ddd;
+    }
+    &.selected {
+      background: #ccc;
+    }
   }
 }
