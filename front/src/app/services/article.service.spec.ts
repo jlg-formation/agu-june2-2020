@@ -49,7 +49,7 @@ describe('ArticleService', () => {
     service = TestBed.inject(ArticleService);
     service.add(article1);
     service.add(article2);
-    service.remove([service.articles$.value[0]]);
+    service.remove([service.articles$.value[0].id]);
 
     expect(JSON.parse(fakeLocalStorage.articles).length).toBe(1);
   });
