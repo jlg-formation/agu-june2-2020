@@ -10,7 +10,6 @@ import { Article } from 'src/app/interfaces/article';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-
   faSync = faSync;
   faPlus = faPlus;
   faTrashAlt = faTrashAlt;
@@ -35,7 +34,7 @@ export class ListComponent implements OnInit {
 
   remove() {
     console.log('remove');
-    this.articleService.remove(this.selectedArticles);
+    this.articleService.remove(this.selectedArticles.map((a) => a.id));
     this.selectedArticles.length = 0;
   }
 }

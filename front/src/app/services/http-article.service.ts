@@ -52,14 +52,13 @@ export class HttpArticleService extends ArticleService {
       });
   }
 
-  remove(selectedArticles: Article[]): void {
-    const ids = selectedArticles.map((a) => a.id);
-    super.remove(selectedArticles);
+  remove(selectedIds: string[]): void {
+    super.remove(selectedIds);
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       }),
-      body: ids,
+      body: selectedIds,
     };
     this.http
       .delete<void>('/ws/articles', options)

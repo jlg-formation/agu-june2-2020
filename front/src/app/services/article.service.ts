@@ -34,9 +34,9 @@ export class ArticleService {
     this.articles$.next(this.articles$.value);
   }
 
-  remove(selectedArticles: Article[]): void {
+  remove(selectedIds: string[]): void {
     this.articles$.next(
-      this.articles$.value.filter((a) => !selectedArticles.includes(a))
+      this.articles$.value.filter((a) => !selectedIds.includes(a.id))
     );
   }
 }
