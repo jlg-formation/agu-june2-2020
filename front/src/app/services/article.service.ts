@@ -6,13 +6,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ArticleService {
-  articles$ = new BehaviorSubject<Article[]>(this.getArticles());
+  articles$ = new BehaviorSubject<Article[]>([]);
 
   constructor(@Inject('Window') protected window: Window) {
-    console.log('service instantiated');
     this.articles$.subscribe((articles) => {
       this.window.localStorage.setItem('articles', JSON.stringify(articles));
     });
+    this.refresh();
   }
 
   getArticles(): Article[] {
@@ -24,7 +24,8 @@ export class ArticleService {
   }
 
   refresh() {
-    this.articles$.next(this.getArticles());
+    const articles = this.getArticles();
+    this.articles$.next(articles);
   }
 
   add(article: Article) {

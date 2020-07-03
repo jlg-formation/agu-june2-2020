@@ -1,5 +1,5 @@
 export const fakeLocalStorage = {
-  articles: undefined,
+  articles: JSON.stringify([{ name: 'Tournevis', price: 2.34, qty: 120 }]),
 };
 
 export const windowMock = {
@@ -11,17 +11,6 @@ export const windowMock = {
       },
       setItem(key: string, val: string) {
         fakeLocalStorage[key] = val;
-      },
-    },
-  },
-};
-
-export const windowMock2 = {
-  provide: 'Window',
-  useValue: {
-    localStorage: {
-      getItem(str) {
-        return JSON.stringify([{ name: 'Tournevis', price: 2.34, qty: 120 }]);
       },
     },
   },

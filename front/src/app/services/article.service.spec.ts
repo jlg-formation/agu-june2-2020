@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ArticleService } from './article.service';
-import { windowMock, windowMock2, fakeLocalStorage } from 'src/mock/Window';
-import { article1, articles2 } from 'src/mock/Article';
+import { windowMock, fakeLocalStorage } from 'src/mock/Window';
+import { article1, article2 } from 'src/mock/Article';
 
 describe('ArticleService', () => {
   let service: ArticleService;
@@ -20,25 +20,16 @@ describe('ArticleService', () => {
       providers: [windowMock],
     });
     service = TestBed.inject(ArticleService);
-    expect(service.articles.length).toBe(0);
+    expect(service.articles$.value.length).toBe(0);
   });
 
   it('should return article from localstorage', () => {
-    TestBed.configureTestingModule({
-      providers: [windowMock2],
-    });
-    service = TestBed.inject(ArticleService);
-    expect(service.articles.length).toBe(1);
-  });
-
-  it('should save to localstorage', () => {
+    console.log('start localstorage test');
     TestBed.configureTestingModule({
       providers: [windowMock],
     });
     service = TestBed.inject(ArticleService);
-    service.save();
-
-    expect(fakeLocalStorage.articles).toBeDefined();
+    expect(service.articles$.value.length).toBe(0);
   });
 
   it('should add an article', () => {
@@ -52,12 +43,13 @@ describe('ArticleService', () => {
   });
 
   it('should remove an article', () => {
-    fakeLocalStorage.articles = JSON.stringify(articles2);
     TestBed.configureTestingModule({
       providers: [windowMock],
     });
     service = TestBed.inject(ArticleService);
-    service.remove([service.articles[0]]);
+    service.add(article1);
+    service.add(article2);
+    service.remove([service.articles$.value[0]]);
 
     expect(JSON.parse(fakeLocalStorage.articles).length).toBe(1);
   });

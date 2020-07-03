@@ -13,16 +13,12 @@ export class HttpArticleService extends ArticleService {
     private http: HttpClient
   ) {
     super(window);
-    console.log('instantiated http article service');
-    this.refresh();
   }
 
   refresh() {
     super.refresh();
-    console.log('start refresh');
     this.http.get<Article[]>('http://localhost:3000/ws/articles').subscribe({
       next: (articles) => {
-        console.log('articles: ', articles);
         this.articles$.next(articles);
       },
       error: (err) => {
