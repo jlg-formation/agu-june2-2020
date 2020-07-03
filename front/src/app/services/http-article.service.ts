@@ -23,8 +23,7 @@ export class HttpArticleService extends ArticleService {
     this.http.get<Article[]>('http://localhost:3000/ws/articles').subscribe({
       next: (articles) => {
         console.log('articles: ', articles);
-        this.articles = articles;
-        this.save();
+        this.articles$.next(articles);
       },
       error: (err) => {
         console.error('err: ', err);

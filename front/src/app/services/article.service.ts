@@ -1,14 +1,18 @@
 import { Injectable, Inject } from '@angular/core';
 import { Article } from '../interfaces/article';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
-  articles: Article[] = this.getArticles();
+  articles$ = new BehaviorSubject<Article[]>(this.getArticles());
 
   constructor(@Inject('Window') protected window: Window) {
     console.log('service instantiated');
+    this.articles$.subscribe((articles) => {
+      this.window.localStorage.setItem('articles', JSON.stringify(articles));
+    });
   }
 
   getArticles(): Article[] {
@@ -20,20 +24,17 @@ export class ArticleService {
   }
 
   refresh() {
-    this.articles = this.getArticles();
-  }
-
-  save() {
-    this.window.localStorage.setItem('articles', JSON.stringify(this.articles));
+    this.articles$.next(this.getArticles());
   }
 
   add(article: Article) {
-    this.articles.push(article);
-    this.save();
+    this.articles$.value.push(article);
+    this.articles$.next(this.articles$.value);
   }
 
   remove(selectedArticles: Article[]): void {
-    this.articles = this.articles.filter(a => !selectedArticles.includes(a));
-    this.save();
+    this.articles$.next(
+      this.articles$.value.filter((a) => !selectedArticles.includes(a))
+    );
   }
 }
