@@ -1,21 +1,32 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, getTestBed } from '@angular/core/testing';
 
 import { HttpArticleService } from './http-article.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { windowMock } from 'src/mock/Window';
 
 describe('HttpArticleService', () => {
   let service: HttpArticleService;
+  let injector: TestBed;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [windowMock],
     });
+    injector = getTestBed();
     service = TestBed.inject(HttpArticleService);
+    httpMock = injector.inject(HttpTestingController);
   });
 
-  // it('should be created', () => {
-  //   expect(service).toBeTruthy();
-  // });
+  it('should be created', () => {
+    const req = httpMock.expectOne(`http://localhost:3000/ws/articles`);
+    expect(req.request.method).toBe('GET');
+    req.flush([]);
+    expect(service).toBeTruthy();
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
 });
