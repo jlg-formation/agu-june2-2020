@@ -9,10 +9,11 @@ export class ArticleService {
   articles$ = new BehaviorSubject<Article[]>([]);
 
   constructor(@Inject('Window') protected window: Window) {
-    this.articles$.subscribe((articles) => {
-      this.window.localStorage.setItem('articles', JSON.stringify(articles));
+    this.articles$.subscribe((data) => {
+      this.window.localStorage.setItem('articles', JSON.stringify(data));
     });
-    this.refresh();
+    const articles = this.getArticles();
+    this.articles$.next(articles);
   }
 
   getArticles(): Article[] {

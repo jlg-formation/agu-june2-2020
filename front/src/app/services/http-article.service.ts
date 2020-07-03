@@ -13,10 +13,15 @@ export class HttpArticleService extends ArticleService {
     private http: HttpClient
   ) {
     super(window);
+    this.retrieveAll();
   }
 
   refresh() {
     super.refresh();
+    this.retrieveAll();
+  }
+
+  retrieveAll() {
     this.http.get<Article[]>('http://localhost:3000/ws/articles').subscribe({
       next: (articles) => {
         this.articles$.next(articles);
