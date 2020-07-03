@@ -22,7 +22,7 @@ export class HttpArticleService extends ArticleService {
   }
 
   retrieveAll() {
-    this.http.get<Article[]>('http://localhost:3000/ws/articles').subscribe({
+    this.http.get<Article[]>('/ws/articles').subscribe({
       next: (articles) => {
         this.articles$.next(articles);
       },
@@ -38,7 +38,7 @@ export class HttpArticleService extends ArticleService {
   add(article: Article) {
     super.add(article);
     this.http
-      .post<void>('http://localhost:3000/ws/articles', article)
+      .post<void>('/ws/articles', article)
       .subscribe({
         next: () => {
           this.refresh();
@@ -62,7 +62,7 @@ export class HttpArticleService extends ArticleService {
       body: ids,
     };
     this.http
-      .delete<void>('http://localhost:3000/ws/articles', options)
+      .delete<void>('/ws/articles', options)
       .subscribe({
         next: () => {
           this.refresh();
