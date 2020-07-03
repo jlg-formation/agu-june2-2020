@@ -43,8 +43,9 @@ app.delete("/ws/articles", (req, res) => {
   res.status(204).end();
 });
 
-app.use(express.static("www"));
-app.use(serveIndex("www", { icons: true }));
+const www = "../front/dist/front";
+app.use(express.static(www));
+app.use(serveIndex(www, { icons: true }));
 
 app.listen(3000, () => {
   console.log("Server successfully started on port 3000");
