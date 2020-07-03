@@ -1,6 +1,6 @@
 import express from "express";
 import serveIndex from "serve-index";
-import cors from "cors";
+// import cors from "cors";
 
 let articles = [
   { id: "a1", name: "Tournevis", price: 2.34, qty: 123 },
@@ -16,7 +16,7 @@ const app = express();
 
 app.use((req, res, next) => setTimeout(next, 1000));
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 // middleware for logging url
