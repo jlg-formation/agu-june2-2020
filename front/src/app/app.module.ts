@@ -29,6 +29,7 @@ registerLocaleData(localeFr, 'fr');
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
     { provide: ArticleService, useClass: HttpArticleService },
+    { provide: 'Window', useValue: window },
   ],
   bootstrap: [AppComponent],
 })
